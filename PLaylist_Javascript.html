@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Javascript Playlist</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css"/>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.js"></script>
+    <script type="text/javascript">
+
+    var lagu = ["Flutter - O.When.mp3","Hatsune Miku - Gimme Gimme.mp3","That Night - Eric Nam.mp3","Into My Heart - Lee So Ra.mp3","The Day We Met - CHEEZE.mp3"];
+    var album = ["Playlist1.jpg","Playlist2.jpg","Playlist3.jpg","Playlist4.jpg","Playlist5.jpg"];
+
+    function Firstload(){
+    // Ini Digunakan untuk penampilan list lagu dari array
+
+    var playlist = document.getElementById('playlist');
+    // Mengambil elemen dengan list lagu
+    for (var i = 0; i < lagu.length; i++) {
+        // Membuat Element Baru
+        var element = "";
+        element += "<li class='list-group-item'";
+        element += "onclick='Choose("+i+")''>";
+        element += lagu[i]+"</li>";
+        playlist.innerHTML += element;
+    }
+    }
+
+    function Choose(index){
+        // Digunakan Untuk Memutar Lagu Yang Dipilih
+        var audio = document.getElementById('audio');
+        // set source dari audio
+        audio.src = lagu[index];
+        audio.play(); //Memutar Audio
+
+        // Mengambil Element Picture Untuk Album
+        var picture = document.getElementById('album');
+        // set source dari img
+        picture.src = album[index];
+        picture.style.width = '75%';
+    }
+
+    function Play(){
+        var audio = document.getElementById('audio');
+        audio.play();
+    }
+
+    function Pause(){
+        var audio = document.getElementById('audio');
+        audio.pause();
+    }
+    
+    function Stop(){
+        var audio = document.getElementById('audio');
+        audio.pause();
+        audio.currentTime = 0;
+    }
+    
+    </script>
+</head>
+<body onload="Firstload();">
+    <div class="container">
+        <div class="card col-sm-6">
+            <div class="card-header bg-success text-white">
+                <h4>Playlist Javascript</h4>
+            </div>
+            <div class="card-body">
+                <!-- Ini tampilan gambar -->
+                <div class="col-sm-12">
+                    <img src="" class="img" id="album">
+                </div>
+
+                <!-- elemen Audio -->
+                <audio id="audio">
+
+                </audio>
+
+                <!-- Ini tampilan Button Control -->
+                <div class="btn-group col-sm-12">
+                    <button type="button" class="col-sm-4 btn btn-warning"
+                    onclick="Pause();">
+                        Pause
+                    </button>
+                    <button type="button" class="col-sm-4 btn btn-success"
+                    onclick="Play();">
+                        Play
+                    </button>
+                    <button type="button" class="col-sm-4 btn btn-danger"
+                    onclick="Stop();">
+                        Stop
+                    </button>
+                </div>
+
+                <!-- Ini list Lagu -->
+                <div class="col-sm-12 list-group" id="playlist">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
